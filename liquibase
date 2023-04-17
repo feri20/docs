@@ -1,0 +1,18 @@
+add database configurtion to application.properties
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/yourdatabase
+spring.datasource.username=example
+spring.datasource.password=example
+
+add liquibase to application.properties
+
+spring.liquibase.change-log=classpath:db/changelog/changelog.sql
+its possible to use xml and yaml instead of sql file for change log
+
+add maven dependdency to pom file
+
+<dependency>
+       <groupId>org.liquibase</groupId> 
+       <artifactId>liquibase-core</artifactId>
+</dependency>
+
