@@ -9,5 +9,4 @@ Add springdoc-openapi-ui dependency instead.
         <version>1.6.6</version>
     </dependency>
 
-add this to your application.properties file
  http://localhost:8080/swagger-ui/index.html
