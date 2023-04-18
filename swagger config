@@ -1,0 +1,13 @@
+
+
+Springboot version 2.6.0 and higher does not support swagger 2 Remove springfox and swagger 2 dependencies.
+Add springdoc-openapi-ui dependency instead.
+
+    <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-ui</artifactId>
+        <version>1.6.6</version>
+    </dependency>
+
+add this to your application.properties file
+ http://localhost:8080/swagger-ui/index.html
