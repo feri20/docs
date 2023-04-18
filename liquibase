@@ -3,6 +3,8 @@ add database configurtion to application.properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/yourdatabase
 spring.datasource.username=example
 spring.datasource.password=example
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
 
 add liquibase to application.properties
 
