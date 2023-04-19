@@ -1,0 +1,11 @@
+add this to pom to specify maven profiles for project 
+<profiles>
+    <profile>
+        <id>integration-tests</id>
+    </profile>
+    <profile>
+        <id>mutation-tests</id>
+    </profile>
+</profiles>
+
+@Profile is used when we are going to map a bean to a particular profile
