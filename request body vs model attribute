@@ -1,0 +1,10 @@
+@modelAttribute
+
+http://.../?name=Something&age=100
+public String doSomething(@ModelAttribute User user) { }
+
+@requestBody: 
+
+{ "name": "Something", "age": "100" } in request body
+public String doSomething(@RequestBodyUser user) { }
+
