@@ -1,4 +1,8 @@
- ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+conversion with jackson
+
+
+
+ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 String json = ow.writeValueAsString(registerDto);
 
 String json = "{ \"color\" : \"Black\", \"type\" : \"BMW\" }";
