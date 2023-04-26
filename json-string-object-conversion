@@ -1,5 +1,7 @@
 conversion with jackson
 
+ObjectMapper objectMapper = new ObjectMapper();
+
 ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 String json = ow.writeValueAsString(registerDto);
 
