@@ -18,6 +18,22 @@ as string.
 
 private WebClient.Builder webclient;
 
-webclient.baseUrl("http://localhost:8080/api").build().post().uri("/test").retrieve().bodyToMono(String.class).block();
-webclient.baseUrl("http://localhost:8080/api").build().get().uri("/test").retrieve().bodyToMono(String.class).block();
+webclient.baseUrl("http://localhost:8080/api")
+.build()
+.post()
+.uri("/test")
+.contentType(MediaType.APPLICATION_JSON)
+.body(BodyInserters.fromValue(json))
+.retrieve()
+.bodyToMono(String.class)
+.block();
+
+
+webclient.baseUrl("http://localhost:8080/api")
+.build()
+.get()
+.uri("/test")
+.retrieve()
+.bodyToMono(String.class)
+.block();
 
