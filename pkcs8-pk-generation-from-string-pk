@@ -19,3 +19,7 @@ public void testKey() throws Exception {
     Assert.assertNotNull("Failed to generate the private key", key);
 }
 
+to read the private key from .pem file and get the pk as string you need to call
+Files.readString and then replace begin and end part of the key with "" you also need to
+replace "\\n" to "".
+
