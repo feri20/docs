@@ -7,3 +7,6 @@ String json = ow.writeValueAsString(registerDto);
 
 String json = "{ \"color\" : \"Black\", \"type\" : \"BMW\" }";
 Car car = objectMapper.readValue(json, Car.class);	
+
+to convert a pojo to json with different proprty names place @JsonPrperty("jsonpropertyname")
+on the pojo related property.
