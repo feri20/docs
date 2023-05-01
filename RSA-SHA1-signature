@@ -1,0 +1,18 @@
+
+****** rsa-sha1 with only privatekey *******
+
+String data;
+Privatekey key;
+
+try{
+
+Signature signature = Signature.getInstance("SHA1withRSA");
+signature.initSign(key);
+signature.update(data.getByte(StandardCharset.UTF_16LE));
+byt[] rawRsa = signature.sign();
+return Base64.encodeBase64String(rawRsa);
+}catch(Eaception ex){
+   new SignatureException(" failed to generate signature);
+}
+
+*************************************************
