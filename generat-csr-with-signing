@@ -1,0 +1,31 @@
+first we need to generate a keypair and after that
+
+KeyPair generateKeyPair(String alg, int keySize) {
+        try{
+            KeyPairGenerator keyPairGenerator = null;
+            keyPairGenerator = KeyPairGenerator.getInstance(alg);
+             
+            keyPairGenerator.initialize(keySize);
+             
+            return keyPairGenerator.generateKeyPair();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+         
+        return null;
+
+PKCS10CertificationRequestBuilder p10Builder = new JcaPKCS10CertificationRequestBuilder(
+    new X500Principal("CN=Requested Test Certificate,l=,o=,c=,and optional key values"), pair.getPublic());
+JcaContentSignerBuilder csBuilder = new JcaContentSignerBuilder("SHA256withRSA");
+JcaPEMWriter jcaPEMWriter = new JcaPEMWriter(new FileWriter("cert/test.csr"));
+    jcaPEMWriter.writeObject(csr);
+    jcaPEMWriter.close();
+
+create the subject for the certificate request 
+and also create a signature for the certificate request
+ContentSigner signer = csBuilder.build(pair.getPrivate());
+PKCS10CertificationRequest csr = p10Builder.build(signer
+
+Sign the certificate request with the private key from the keypair
+Get the encoded certificate request data and store it 
+and sent it to the CA to create the certificat
