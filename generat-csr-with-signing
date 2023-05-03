@@ -29,3 +29,8 @@ PKCS10CertificationRequest csr = p10Builder.build(signer
 Sign the certificate request with the private key from the keypair
 Get the encoded certificate request data and store it 
 and sent it to the CA to create the certificat
+
+****** sign generated csr with public key ***** 
+the generated csr has a begin and end string ------BEGIN CERTIFICATE REQUEST----- and -----END CERTIFICATE REQUEST-------
+the string between this parts is in base64 form 
+to sign a generated csr with a special private key we need to decode base64 part to create binary and sign the csr
