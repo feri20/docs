@@ -10,3 +10,22 @@ Add springdoc-openapi-ui dependency instead.
     </dependency>
 
  http://localhost:8080/swagger-ui/index.html
+
+
+add APIKey security in header to swagger config 
+for another security types required elements of security schemes can be found at https://swagger.io/docs/specification/authentication/
+@Configuration
+@SecurityScheme(
+        name = "apiKey", // can be set to anything
+        type = SecuritySchemeType.APIKEY,
+        scheme = "ApiKeyAuth",
+        in = SecuritySchemeIn.HEADER
+)
+@OpenAPIDefinition(
+        info = @Info(title = "Sample API", version = "v1"),
+        security = @SecurityRequirement(name = "ApiKeyAuth") // references the name defined in the line 3 
+)
+class OpenAPIConfiguration {
+
+}
+
