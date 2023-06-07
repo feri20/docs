@@ -1,0 +1,36 @@
+public class ApiKeyFilter extends GenericFilterBean {
+
+private Repository repository;
+
+@Override
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException{
+
+HttpServletRequest req = (HttpServletRequest) request;
+        String path = req.getRequestURI();
+
+        if(!path.startsWith("/api/v1")){
+            chain.doFilter(request, response);
+        }else{
+            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            String key = req.getHeader("apiKey") == null ? "" : req.getHeader("apiKey");
+            Optional<UserDetails> userOptional = userDetailRepository.findByApiKey(key);
+            if(userOptional.isPresent()){
+                req.setAttribute("user",ow.writeValueAsString(userOptional.get()));
+                chain.doFilter(request, response);
+            }else{
+                HttpServletResponse resp = (HttpServletResponse) response;
+                String error = "missing or Invalid API KEY";
+                resp.reset();
+                resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setContentLength(error .length());
+                response.getWriter().write(error);
+                
+            }
+            
+        }
+}
+
+
+
+
+}
