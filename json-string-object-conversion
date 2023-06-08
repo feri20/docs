@@ -10,3 +10,10 @@ Car car = objectMapper.readValue(json, Car.class);
 
 to convert a pojo to json with different proprty names place @JsonPrperty("jsonpropertyname")
 on the pojo related property.
+
+
+to fix json infinite recursion error in fetching parent entity with its child we can use two annotations:
+    @JsonBackReference
+    place this on top of parent property in @ManyToOne relation in child entity 
+   @JsonManagedReference
+    puth this annotation on top of list of child in @OneToMany relation in parent entity
