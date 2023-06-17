@@ -1,2 +1,11 @@
 uploading file to nexus:
 curl -v --user user:passwoed --upload-file filename  http://....
+for using ci-cd variables as docker file arg we can pass them as arg to docker file :
+
+in the docker file :
+ARG argname
+ARG argname2
+
+in the gitlab-ci :
+
+for build script we need to add --build-arg="$variable1" --build-arg="$variable2" 
