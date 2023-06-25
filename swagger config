@@ -29,3 +29,5 @@ class OpenAPIConfiguration {
 
 }
 
+for generating open api ui based on custom yml file we need to place it in static folder of java project and 
+add springdoc.swagger-ui.url=/filename.yml
