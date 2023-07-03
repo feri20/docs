@@ -1,0 +1,5 @@
+resolve.conf:
+name server  ip
+
+hosts:
+ip addressname
