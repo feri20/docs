@@ -1,1 +1,4 @@
-
+how to get IP address from request url:
+String source =  req.getHeader("referer");
+            String[] splitUp = source.split("/");
+            String ipAddress = splitUp[2];
