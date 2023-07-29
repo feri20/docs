@@ -1,1 +1,11 @@
+for some scheduled tasks its not necessary to use threads instead we can use timer 
 
+defining a timer in java :
+
+Timer timer = new Timer();
+timer.schedule(new TimerTask(){
+@Override
+public void run(){
+//task you need to be done
+}
+},delay)
