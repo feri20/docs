@@ -16,4 +16,4 @@ B-tree indexes can also be used to retrieve data in sorted order. This is not al
 
 CREATE INDEX name ON table USING HASH (column);
 
-if there is no other special hash except the default one (B-tree) we just write table(column);
+if we are not going to use any other special hash except the default one (B-tree) we just write table(column);
