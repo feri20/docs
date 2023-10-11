@@ -3,4 +3,10 @@ public XSSFWorkbook exportExcel(List<Object objectsList){
     XSSFSheet sheet =  workbook.createSheet("name);
    Row header = sheet.createRow(0);
    header.createCell(0).setCellValue(value);
+   int rawcount = 0;
+   for (Object object : objectList){
+   Row row = sheet.createRow(++rowCount);
+   Cell name = row.createCell(0);
+   name.setCellValue(value);
+   }
 }
