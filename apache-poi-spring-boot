@@ -6,9 +6,9 @@
 
 
 
+export and download
 
-
-public XSSFWorkbook exportExcel(List<Object objectsList){
+public XSSFWorkbook exportToExcel(List<Object objectsList){
     XSSFWorkBook workbook = new XSSFWorkBook();
     XSSFSheet sheet =  workbook.createSheet("name);
    Row header = sheet.createRow(0);
@@ -19,4 +19,15 @@ public XSSFWorkbook exportExcel(List<Object objectsList){
    Cell name = row.createCell(0);
    name.setCellValue(value);
    }
+  ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+  workbook.write(outputStream);
+ 
+}
+
+@GetMapping("/api){
+   public ResponseEntity<byte[]> getExcel(){
+      byte[] workbook = service.exportToExcel();
+      return ResponseEntity.ok().header("Content-Type","application/vnd.openxmlformats-officedocuments.spreadsheetml.sheet").body(workbook);
+   }
+   
 }
