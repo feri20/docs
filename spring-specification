@@ -22,4 +22,5 @@ public class ProductSpecification{
 public List<Product> filterProduct(FilterRequest request){
     Specification<Product> spec =  Specification.where(ProductSpecification.hasPrice(request.getPrice())
                                                 .and(ProductSpecification.hasName()));
+return productRepository.findAll(spec);
 }
