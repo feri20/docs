@@ -1,0 +1,25 @@
+how to create spring specification for an entity
+
+
+//create the entity specification class 
+public class ProductSpecification{
+
+    public static Speicification<Product> hasPrice(Long price){
+       if(price!=null){
+           return(root,query,cb)->cb.equl(root.get("price"),price);
+       }
+       return (root,query,cb)-> cb.conjunction();
+    }
+
+    public static Specification<Product> hasName(String name){
+      if(name!=null && !name.isEmpty){
+         return (root,query,cb)-> cb.like(root.get("name"),"%"+name+"%");
+      }
+    }
+} 
+
+//service method for filter based on specification 
+public List<Product> filterProduct(FilterRequest request){
+    Specification<Product> spec =  Specification.where(ProductSpecification.hasPrice(request.getPrice())
+                                                .and(ProductSpecification.hasName()));
+}
