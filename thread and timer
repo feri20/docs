@@ -9,3 +9,28 @@ public void run(){
 //task you need to be done
 }
 },delay)
+
+//for schedule a task to execute from starting of the spring boot project
+we need to use @EnableScheduling in the main class and add @Scheduled(fixedrate=milisecond value)
+on the task method in our spring bean.
+
+
+
+//we can get any spring bean around our application by :
+
+ApplicationContext applicationContext = SpringApplication.run(DemoApplication.class, args);
+Service service = applicationContext.getBean(Service.class);
+
+//define a scheduler 
+ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+// Define the special method as a Runnable or implement the Callable interface
+      Runnable specialMethod = new Runnable() {
+          @Override
+          public void run() {
+             // Put your special method's code here
+             System.out.println("Executing the special method...");
+            }
+        };
+
+ // Schedule the special method to run with a fixed delay
+    scheduler.scheduleWithFixedDelay(specialMethod,//starting point 0, //waiting time 1, TimeUnit.MINUTES);
