@@ -1,0 +1,9 @@
+@Pointcut("execution(* com.example.timer.TestService.method()) ")
+    private void method()  { }
+    @Pointcut("execution(* com.example.timer.TestService.method2()) ")
+    private void method2()  { }
+
+    @After("method2()||method()")
+    public void afterAdvice(JoinPoint joinPoint)
+    {
+    }
