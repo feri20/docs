@@ -1,0 +1,30 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%yellow(%d{HH:mm:ss.SSS}) %highlight(%-5level) %logger{36} - %msg%n</pattern>
+        </encoder>
+        <appenders>
+            <Socket name="ElkAppender" host="localhost" port="9200" protocol="log4j_socket" immediateFlush="true" compression="none">
+                <pattern>%yellow(%d{HH:mm:ss.SSS}) %highlight(%-5level) %logger{36} - %msg%n</pattern>
+            </Socket>
+        </appenders>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${user.dir}/src/main/resources/logs/logfile</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${user.dir}/src/main/resources/logs/RAWrapper.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>1024</maxHistory>
+            <totalSizeCap>100GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <AppenderRef ref="ElkAppender"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
