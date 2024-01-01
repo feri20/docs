@@ -9,3 +9,19 @@ ARG argname2
 in the gitlab-ci :
 
 for build script we need to add --build-arg="$variable1" --build-arg="$variable2" 
+how to get version from pom and pass it as argument to gitlab ci to us as docker image version tag
+
+staging-app-build:
+  stage: staging-app-build
+  image:
+    name: ..../maven:3.8.3-openjdk-17
+  script:
+    - mvn clean install -Dmaven.test.skip=true
+    - export APP_VERSION=$(mvn help:evaluate -Dexpression="project.version" -q -DforceStdout)
+    - echo "APP_VERSION=$APP_VERSION" >> build.env
+
+  variables:
+       MY_VARIABLE: "default_value"
+
+    reports:
+      dotenv: build.env
