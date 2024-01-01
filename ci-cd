@@ -25,3 +25,10 @@ staging-app-build:
 
     reports:
       dotenv: build.env
+staging-docker-build:
+  stage: staging-docker-build
+  before_script:
+    - docker login $PUSH_REPO_URL -u $USER -p $PASS
+    - docker login $PULL_REPO_URL -u $USER -p $PASS
+  script:
+    - docker push ......./staging:$APP_VERSION
