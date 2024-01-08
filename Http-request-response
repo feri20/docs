@@ -2,3 +2,8 @@ how to get IP address from request url:
 String source =  req.getHeader("referer");
             String[] splitUp = source.split("/");
             String ipAddress = splitUp[2];
+
+Host Header Matching:
+When you use the domain, the Host header in the HTTP request matches the server_name directive in your Nginx configuration (server_name my actual ip;).
+However, when you use the IP address, the Host header might not match, and Nginx could be treating the request differently.
+Make sure that the Host header in your Postman request matches the specified server name.
