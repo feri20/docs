@@ -7,3 +7,17 @@
     public void afterAdvice(JoinPoint joinPoint)
     {
     }
+
+if your methods have return type it would be : 
+
+@Pointcut(value = "execution(* com.example.apis.ApiController.method(String,String,String))&&args(arg1,arg2,arg3))")
+    public void method(String arg1, String arg2,String arg3) {
+    }
+
+    @AfterReturning(pointcut = "method(nationalCode,trackingCode,user)",returning="response",argNames = "arg1,arg2, arg3, response")
+    public void afterAdvice(String arg1, String arg2,String arg3,Object response) {
+
+         task to do here ....
+
+      
+    }
