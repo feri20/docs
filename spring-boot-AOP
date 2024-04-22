@@ -21,3 +21,15 @@ if your methods have return type it would be :
 
       
     }
+
+ @Pointcut("@annotation(org.springframework.web.bind.annotation.PostMapping) && execution(org.springframework.http.ResponseEntity *.*(..))")
+    public void myPointCut() {
+    }
+
+@AfterReturning(pointcut = "myPointCut()",returning = "response")
+    public void afterRegisterRevoke(JoinPoint joinPoint, Object response ) {
+       
+    }
+@AfterThrowing(pointcut = "registerRevoke()",throwing = "exception")
+    public void registerRevoke(Throwable exception) {
+}
