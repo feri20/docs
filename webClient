@@ -28,8 +28,9 @@ webclient.baseUrl("http://localhost:8080/api")
 .bodyToMono(String.class)
 .block();
 
-
-webclient.baseUrl("http://localhost:8080/api")
+for ssl :
+webclient.baseUrl("https://localhost:8080/api")
+.clientConnector(new ReactorClientHttpConnector(sslConnection()))
 .build()
 .get()
 .uri("/test")
@@ -37,3 +38,15 @@ webclient.baseUrl("http://localhost:8080/api")
 .bodyToMono(String.class)
 .block();
 
+private HttpClient sslConnection() throws NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException {
+        KeyStore trustStore = KeyStore.getInstance("PKCS12");
+        String pass = "password";
+        trustStore.load(ApiCaller.class.getClassLoader().getResourceAsStream("keystore.p12"), pass.toCharArray());
+        TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        trustManagerFactory.init(trustStore);
+        SslContext sslContext = SslContextBuilder.forClient()
+                .trustManager(InsecureTrustManagerFactory.INSTANCE)
+                .build();
+        return HttpClient.create()
+                .secure(sslSpec -> sslSpec.sslContext(sslContext));
+    }
