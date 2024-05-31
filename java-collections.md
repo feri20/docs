@@ -20,7 +20,7 @@ Interfaces
             ArrayDeque
 
     Map Interface
-        HashMap  (https://github.com/feri20/docs/hashmap.md)
+        HashMap  hashmap.md
             LinkedHashMap
         TreeMap
         Hashtable
