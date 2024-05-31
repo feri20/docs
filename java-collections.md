@@ -20,7 +20,7 @@ Interfaces
             ArrayDeque
 
     Map Interface
-        HashMap
+        HashMap  (docs/hashmap.md)
             LinkedHashMap
         TreeMap
         Hashtable
