@@ -1,0 +1,13 @@
+you can use generics for method output in Java. By specifying a generic type parameter for the method,
+you can create methods that can return different types based on the type specified by the caller.
+This provides flexibility and type safety without the need for casting.
+  
+  public <T> T getGenericValue(T value) {
+        return value;
+    }
+        Integer intValue = getGenericValue(123);
+        String stringValue = getGenericValue("Hello, World!");
+
+        // Print the returned values
+        System.out.println("Integer value: " + intValue);
+        System.out.println("String value: " + stringValue);
