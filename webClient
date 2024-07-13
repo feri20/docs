@@ -13,7 +13,7 @@
 </dependency>
 
 if you are going to call an api inside your service method you need to use WebClient define webClient as aproperty of your service class 
-then for each request method use samples below and build your webClient based on your target api the bodyToMono part will return target api response body 
+then for each request method use samples below and build your webClient based on your target api the bodyToMono will return target apis response body 
 as string.
 
 private WebClient.Builder webclient;
