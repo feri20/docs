@@ -25,8 +25,7 @@ webclient.baseUrl("http://localhost:8080/api")
 .contentType(MediaType.APPLICATION_JSON)
 .body(BodyInserters.fromValue(json))
 .retrieve()
-.bodyToMono(String.class)
-.block();
+.bodyToMono(String.class);
 
 for ssl :
 webclient.baseUrl("https://localhost:8080/api")
@@ -35,8 +34,7 @@ webclient.baseUrl("https://localhost:8080/api")
 .get()
 .uri("/test")
 .retrieve()
-.bodyToMono(String.class)
-.block();
+.bodyToMono(String.class);
 
 private HttpClient sslConnection() throws NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException {
         KeyStore trustStore = KeyStore.getInstance("PKCS12");
