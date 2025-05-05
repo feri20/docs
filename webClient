@@ -12,7 +12,7 @@
    <version>3.0.6</version>
 </dependency>
 
-if you are going to call an api inside your service method you need to use WebClient define webClient as aproperty of your service class 
+if you are going to call an external api inside your service method you can use non-blocking webflux WebClient define webClient as aproperty of your service class 
 then for each request method use samples below and build your webClient based on your target api the bodyToMono will return target apis response body 
 as string.
 
@@ -48,3 +48,53 @@ private HttpClient sslConnection() throws NoSuchAlgorithmException, KeyStoreExce
         return HttpClient.create()
                 .secure(sslSpec -> sslSpec.sslContext(sslContext));
     }
+
+--------------------------------------------------------------------------
+Single WebClient instance (default config): Can handle hundreds to thousands of concurrent requests efficiently using non-blocking I/O.
+With tuning (connection pool, system resources): Can go 10,000+ depending on hardware and tuning.
+Across multiple nodes: Linear scalability — multiply the limit per node by the number of nodes.
+Spring WebClient uses Reactor Netty (default) with connection pooling via ConnectionProvider.
+
+Default connection pool:
+ConnectionProvider provider = ConnectionProvider.create("fixed", maxConnections);
+WebClient client = WebClient.builder()
+    .clientConnector(new ReactorClientHttpConnector(HttpClient.create(provider)))
+    .build();
+You can set maxConnections (default is 500).
+💡 If not enough connections, requests will wait for a free one.
+2. Reactor Netty Configuration
+You can configure:
+Max connections per host.
+Pending acquire timeout.
+Max pending acquire count.
+I/O threads (reactor.netty.ioWorkerCount).
+
+ConnectionProvider provider = ConnectionProvider.builder("custom")
+    .maxConnections(1000)
+    .pendingAcquireTimeout(Duration.ofSeconds(30))
+    .pendingAcquireMaxCount(5000)
+    .build();
+
+3. Backpressure & System Limits
+Even though WebClient is async and non-blocking:
+JVM heap, CPU, and OS-level socket limits (e.g. ulimit -n on Linux) impact concurrency.
+You might hit limits around 2,000–10,000 before tuning is required.
+
+4. Scaling Across Nodes
+If you deploy multiple service nodes (e.g., in Kubernetes or behind a load balancer):
+Total concurrency = max_per_node × number_of_nodes
+So 4 nodes × 2,000 requests/node = 8,000 concurrent requests total.
+✅ Best Practices for High Concurrency
+Tune ConnectionProvider and HTTP client thread pools.
+Use connection reuse (keep-alive).
+Avoid blocking inside reactive pipelines (block(), JDBC, etc.).
+Monitor Netty metrics.
+Increase OS limits (ulimit, TCP backlog, etc.).
+
+| Configuration     | Approx Max Concurrent Req | Notes                   |
+| ----------------- | ------------------------- | ----------------------- |
+| Default WebClient | \~500–1,000               | Limited by pool and JVM |
+| Tuned WebClient   | \~2,000–10,000            | On modern hardware      |
+| Cluster (4 nodes) | \~8,000–40,000            | Scales with nodes       |
+
+
